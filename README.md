@@ -621,6 +621,16 @@ Kemudian ketika diakses pada url `http://www.granz.channel.it18.com` akan muncul
 
 >Lalu buat untuk setiap request yang mengandung /its akan di proxy passing menuju halaman https://www.its.ac.id. (11)
 
+Konfigurasi nginx ditambahkan dengan command sebagai berikut
+```
+location ~ /its {
+    proxy_pass https://www.its.ac.id;
+    proxy_set_header Host www.its.ac.id;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+```
 
 
 
