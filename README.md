@@ -539,23 +539,24 @@ ab -n 200 -c 10 http://www.granz.channel.it18.com/
 
 **Round Robin**
 
-[IMAGE]
+![round robin](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/91017662/e133d6cb-3dbc-4200-ba9a-5171af82f5db)
 
 **Least Connection**
 
-[Image]
+![least con](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/91017662/ad20566a-3722-498c-ab84-b06c69fee01d)
+
 
 **IP Hash**
 
-[Image]
+![ip hash](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/91017662/dd2bb843-ee72-40f6-92df-377075ac2b09)
 
 ** Generation Hash**
 
-[Image]
+![gen hash](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/91017662/21fba3b8-18af-46f9-8913-e4b1c367833f)
 
 **Grafik**
 
-[Image]
+![image](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/91017662/fd3b123e-eb43-4c32-a19a-6145f5e414a1)
 
 
 ## Soal 9
@@ -573,19 +574,20 @@ ab -n 100 -c 10 http://www.granz.channel.it18.com/
 
 **3 Worker**
 
-[IMAGE]
-
+![3 worker](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/91017662/448f57a0-2fed-4a10-b5ab-78ca9db2e278)
+> Request per second: 1774.06 [#/sec] (mean)
 **2 Worker**
 
-[Image]
-
+![2 worker](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/91017662/81f639b6-3c33-4613-ac31-074b59768628)
+> Request per second: 1755.93 [#/sec] (mean)
 **1 Worker**
 
-[Image]
-
+![1 worker](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/91017662/70bc2846-6c9b-45dd-9b23-a847b64c9058)
+> Request per second: 1395.36 [#/sec] (mean)
 **Grafik**
 
-[Image]
+![image](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/91017662/713641b1-b66e-47f7-96a9-6e7660978124)
+
 
 ## Soal 13
 
