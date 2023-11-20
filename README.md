@@ -13,7 +13,6 @@ Lakukan konfigurasi sesuai dengan peta yang sudah diberikan.
 
 Semua **CLIENT** harus menggunakan konfigurasi dari DHCP Server.
 
----
 
 Set konfigurasi 
 
@@ -237,7 +236,7 @@ hasil :
 
 Client yang melalui Switch3 mendapatkan range IP dari [prefix IP].3.16 - [prefix IP].3.32 dan [prefix IP].3.64 - [prefix IP].3.80 **(2)**
 
----
+
 
 untuk setting prefix IP kita dapat menambahkan kode ini ke DHCP Server di /etc/dhcp/dhcpd.conf
 
@@ -269,7 +268,7 @@ Ritcher
 
 Client yang melalui Switch4 mendapatkan range IP dari [prefix IP].4.12 - [prefix IP].4.20 dan [prefix IP].4.160 - [prefix IP].4.168 **(3)**
 
----
+
 
 untuk setting prefix IP kita dapat menambahkan kode ini ke DHCP Server di /etc/dhcp/dhcpd.conf
 
@@ -301,7 +300,7 @@ Stark
 
 Client mendapatkan DNS dari Heiter dan dapat terhubung dengan internet melalui DNS tersebut **(4)**
 
----
+
 
 Agar semua client dapat terhubung ke internet konfigurasi pada file /etc/bind/named.conf.options pada Heiter (DNS SERVER)
 
@@ -345,7 +344,7 @@ Revolte
 
 Lama waktu DHCP server meminjamkan alamat IP kepada Client yang melalui Switch3 selama 3 menit sedangkan pada client yang melalui Switch4 selama 12 menit. Dengan waktu maksimal dialokasikan untuk peminjaman alamat IP selama 96 menit **(5)**
 
----
+
 
 ```bash
 subnet 192.242.3.0 netmask 255.255.255.0 {
@@ -585,7 +584,6 @@ ab -n 100 -c 10 http://www.granz.channel.it18.com/
 
 Semua data yang diperlukan, diatur pada Denken dan harus dapat diakses oleh Frieren, Flamme, dan Fern. **(13)**
 
----
 
 Pertama-tama pada denken lakukan instalasi sebagai berikut 
 
@@ -649,7 +647,7 @@ hasil :
 
 Frieren, Flamme, dan Fern memiliki Riegel Channel sesuai dengan [quest guide](https://github.com/martuafernando/laravel-praktikum-jarkom) berikut. Jangan lupa melakukan instalasi PHP8.0 dan Composer **(14)**
 
----
+
 
 lakukan instalasi berikut pada worker laravel 
 
@@ -895,7 +893,7 @@ Riegel Channel memiliki beberapa endpoint yang harus ditesting sebanyak 100 requ
 
 POST /auth/register**(15)**
 
----
+
 
 Sebelum memulai lakukan instalasi ini pada client 
 
@@ -942,7 +940,7 @@ Riegel Channel memiliki beberapa endpoint yang harus ditesting sebanyak 100 requ
 
 POST /auth/login **(16)**
 
----
+
 
 tambahkan script berikut ke file login.json
 
@@ -980,7 +978,6 @@ Riegel Channel memiliki beberapa endpoint yang harus ditesting sebanyak 100 requ
 
 GET /me **(17)**
 
----
 
 untuk melakukan ini pertama2 jalankan script ini yang mengarahkan hasil ke login_output.txt
 
@@ -1011,3 +1008,5 @@ Penjelasan :
 - Time per request: Rata-rata waktu yang dibutuhkan untuk menanggapi setiap permintaan adalah 146.379 ms.
 - Connection Times: Waktu tercepat untuk menghubungkan adalah 0 ms, waktu terlama adalah 2 ms. Waktu pemrosesan berkisar antara 31 ms hingga 218 ms.
 - Percentage of Requests Served within a Certain Time: Menunjukkan distribusi waktu respons. Sebagai contoh, 50% dari permintaan diproses dalam waktu kurang dari 141 ms.
+
+---
