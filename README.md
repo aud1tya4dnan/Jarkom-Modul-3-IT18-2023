@@ -631,7 +631,65 @@ location ~ /its {
     proxy_set_header X-Forwarded-Proto $scheme;
 }
 ```
+Script lengkapnya adalah sebagai berikut
+```
+echo '
+#Default menggunakan Round Robin
+upstream worker  {
+server 192.242.3.4; #IP Lawine
+server 192.242.3.3; #IP Linie
+server 192.242.3.2; #IP Lugner
+}
 
+server {
+    listen 80;
+    server_name granz.channel.it18.com www.granz.channel.it18.com;
+
+    root /var/www/html;
+
+    index index.html index.htm index.nginx-debian.html;
+
+
+    location / {
+        proxy_pass http://worker;
+    }
+
+    location /its {
+        proxy_pass https://www.its.ac.id;
+        proxy_set_header Host www.its.ac.id;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+
+} ' > /etc/nginx/sites-available/granz.channel.it18.com
+```
+Kemudian lakukan testing pada Client Revolt
+
+### Output
+![image20](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/91017662/0537ade6-f1e7-4ae8-b4aa-5762d8450501)
+
+## Soal 12
+>Selanjutnya LB ini hanya boleh diakses oleh client dengan IP [Prefix IP].3.69, [Prefix IP].3.70, [Prefix IP].4.167, dan [Prefix IP].4.168.
+
+Tambahkan konfigurasi nginx sebagai berikut
+```
+location / {
+        allow 192.242.3.69;
+        allow 192.242.3.70;
+        allow 192.242.4.167;
+        allow 192.242.4.168;
+        deny all;
+        proxy_pass http://worker;
+    }
+```
+Disini kami hanya mengizinkan beberapa IP saja sesuai dengan ketentual soal dan kamu menolak seluruh IP selain yang telah ditentukan soal. Untuk melakukan testingnya. Bisa dilakukan dengan membuka client yang mendapatkan IP 192.173.3.69 atau 192.173.3.70 atau 192.173.4.167 atau 192.173.4.168
+
+### Output
+Berikan command `lynx http://www.granz.channel.it18.com` pada Revolt
+
+![image26](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/91017662/8d554395-0014-41eb-8f3a-9c252a2cae19)
 
 
 ## Soal 13
