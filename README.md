@@ -188,7 +188,8 @@ service isc-dhcp-relay restart
 
 hasil :
 
-![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled.png)
+![Untitled](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/107627453/c90c5f97-c455-4f23-8830-ebc959055237)
+
 
 **********************Lakukan instalasi DHCP Server********************** 
 
@@ -228,7 +229,7 @@ service isc-dhcp-server restart
 
 hasil :
 
-![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%201.png)
+<img width="351" alt="Untitled 1" src="https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/107627453/ac1489c7-d57c-42b3-bdae-490883da24dc">
 
 ---
 
@@ -256,11 +257,12 @@ hasil ;
 
 Revolte
 
-![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%202.png)
+![Untitled 2](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/107627453/9dfec767-2b57-4ff3-8c4c-619e325a3b2e)
+
 
 Ritcher 
 
-![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%203.png)
+![Untitled 3](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/107627453/7d2ddd8e-55fa-447d-ab30-ec0622b2dacb)
 
 ---
 
@@ -288,11 +290,12 @@ hasil :
 
 Sein
 
-![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%204.png)
+![Untitled 4](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/107627453/fa5a23f4-0684-425f-a3e9-d5ad94e93d2d)
+
 
 Stark
 
-![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%205.png)
+![Untitled 5](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/107627453/acbf0716-e2f7-4289-8a93-5bf928c72131)
 
 ---
 
@@ -324,19 +327,23 @@ Hasil :
 
 Stark
 
-![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%206.png)
+![Untitled 6](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/107627453/3f8ddde0-bfa0-4cf3-8c8d-68636d88da3f)
+
 
 Sein
 
-![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%207.png)
+![Untitled 7](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/107627453/c7daf812-941d-4994-b91b-11aef553bb19)
+
 
 Richter
 
-![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%208.png)
+![Untitled 8](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/107627453/d3bbc43c-6bf5-4756-b5aa-6efa000a7790)
+
 
 Revolte
 
-![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%209.png)
+![Untitled 9](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/107627453/aa18ec5d-03ad-4c0d-9788-5e82ede07fa0)
+
 
 ---
 
@@ -363,7 +370,7 @@ subnet 192.242.4.0 netmask 255.255.255.0 {
 
 hasil :
 
-![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%2010.png)
+![Untitled 10](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/107627453/33a31acf-ef00-4bf4-8f29-4c197fed503e)
 
 ---
 
@@ -635,11 +642,13 @@ mariadb --host=192.242.2.2 --port=3306 --user=kelompokIT18 --password
 
 hasil : 
 
-![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%2011.png)
+![Untitled 11](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/107627453/b9cfcf2c-1b09-4ca8-b5bd-355b457a6a32)
 
-![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%2012.png)
+![Untitled 12](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/107627453/8c411836-d7d9-46ae-8252-30d9167025ba)
 
-![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%2013.png)
+
+![Untitled 13](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/107627453/941df366-c67a-4c02-adad-077c90f04b99)
+
 
 ---
 
@@ -871,19 +880,22 @@ lynx localhost:{Port}
 
 Hasil :
 
-![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%2014.png)
+![Untitled 14](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/107627453/d9f9e475-b47f-48da-ad8a-54128588326a)
+
 
 ******Frieren****** 
 
-![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%2015.png)
+![Untitled 15](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/107627453/04e79fa8-3a03-4809-bf85-6f733d26646f)
+
 
 Flamme
 
-![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%2016.png)
+![Untitled 16](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/107627453/e4fd8240-3e12-4fbb-a317-b9a938924ff3)
+
 
 **********Fern********** 
 
-![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%2017.png)
+![Untitled 17](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/107627453/a93f49b0-8765-4020-8f09-90ee34a853b1)
 
 ---
 
@@ -924,7 +936,8 @@ ab -n 100 -c 10 -p register.json -T application/json http://192.242.4.6:8001/api
 
 Hasil :
 
-![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%2018.png)
+![Untitled 18](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/107627453/222c0341-a902-48c9-a9da-c465d2c16659)
+
 
 Penjelasan :
 
@@ -960,7 +973,8 @@ ab -n 100 -c 10 -p login.json -T application/json http://192.242.4.6:8001/api/au
 
 Hasil  :
 
-![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%2019.png)
+![Untitled 19](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/107627453/8659061f-d8b2-4852-9c25-e877966bbf74)
+
 
 Penjelasan :
 
@@ -999,7 +1013,7 @@ ab -n 100 -c 10 -H "Authorization: Bearer $token" http://192.242.4.6:8001/api/me
 
 Hasil :
 
-![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%2020.png)
+![Untitled 20](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/107627453/2c2fb602-1d54-4597-957d-21be8e838039)
 
 Penjelasan :
 
