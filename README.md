@@ -580,3 +580,434 @@ ab -n 100 -c 10 http://www.granz.channel.it18.com/
 **Grafik**
 
 [Image]
+
+## Soal 13
+
+Semua data yang diperlukan, diatur pada Denken dan harus dapat diakses oleh Frieren, Flamme, dan Fern. **(13)**
+
+---
+
+Pertama-tama pada denken lakukan instalasi sebagai berikut 
+
+```bash
+apt-get update
+apt-get install mariadb-server -y
+```
+
+setelah itu jangan lupa untuk start mysql sebelum digunakan dengan command dibawah
+
+```bash
+service mysql start
+```
+
+bukalah mysql dengan command ‘mysql’ dan jalankan perintah berikut 
+
+```bash
+CREATE USER 'kelompokIT18'@'%' IDENTIFIED BY 'passwordIT18';
+CREATE USER 'kelompokIT18'@'localhost' IDENTIFIED BY 'passwordIT18';
+CREATE DATABASE dbkelompokIT18;
+GRANT ALL PRIVILEGES ON *.* TO 'kelompokIT18'@'%';
+GRANT ALL PRIVILEGES ON *.* TO 'kelompokIT18'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+setelah itu masukkan command berikut pada /etc/mysql/my.cnf agar client dapat mengakses database
+
+```bash
+[mysqld]
+skip-networking=0
+skip-bind-address
+
+Service my
+SELECT user, host FROM mysql.user;
+```
+
+Setelah itu bukalah client dan lakukan instalasi berikut 
+
+```bash
+apt-get update
+apt-get install mariadb-client -y
+```
+
+jalankan command berikut untuk mengakses database
+
+```bash
+mariadb --host=192.242.2.2 --port=3306 --user=kelompokIT18 --password
+```
+
+hasil : 
+
+![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%2011.png)
+
+![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%2012.png)
+
+![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%2013.png)
+
+---
+
+## Soal 14
+
+Frieren, Flamme, dan Fern memiliki Riegel Channel sesuai dengan [quest guide](https://github.com/martuafernando/laravel-praktikum-jarkom) berikut. Jangan lupa melakukan instalasi PHP8.0 dan Composer **(14)**
+
+---
+
+lakukan instalasi berikut pada worker laravel 
+
+```bash
+apt-get update
+apt-get install -y lsb-release ca-certificates apt-transport-https software-properties-common gnupg2
+curl -sSLo /usr/share/keyrings/deb.sury.org-php.gpg https://packages.sury.org/php/apt.gpg
+sh -c 'echo "deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
+
+apt-get update
+apt-get install php8.0-mbstring php8.0-xml php8.0-cli php8.0-common php8.0-intl php8.0-opcache php8.0-readline php8.0-mysql php8.0-fpm php8.0-curl unzip wget -y
+apt-get install nginx -y
+
+apt-get update
+apt-get install lynx -y
+```
+
+setelah selesai lakukan instalasi composer dan gitclone
+
+```bash
+wget https://getcomposer.org/download/2.0.13/composer.phar
+chmod +x composer.phar
+mv composer.phar /usr/bin/composer
+
+apt-get install git -y
+cd /var/www
+git clone https://github.com/martuafernando/laravel-praktikum-jarkom.git
+cd /var/www/laravel-praktikum-jarkom/
+composer update
+composer install
+```
+
+setelah itu lakukan konfigurasi ini pada worker
+
+```bash
+cp .env.example .env
+
+echo '
+APP_NAME=Laravel
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://localhost
+
+LOG_CHANNEL=stack
+LOG_DEPRECATIONS_CHANNEL=null
+LOG_LEVEL=debug
+
+DB_CONNECTION=mysql
+DB_HOST=192.242.2.2
+DB_PORT=3306
+DB_DATABASE=dbkelompokIT18
+DB_USERNAME=kelompokIT18
+DB_PASSWORD=passwordIT18
+
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+FILESYSTEM_DISK=local
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+
+MEMCACHED_HOST=127.0.0.1
+
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_MAILER=smtp
+MAIL_HOST=mailpit
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS="hello@example.com"
+MAIL_FROM_NAME="${APP_NAME}"
+
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=
+AWS_USE_PATH_STYLE_ENDPOINT=false
+
+PUSHER_APP_ID=
+PUSHER_APP_KEY=
+PUSHER_APP_SECRET=
+PUSHER_HOST=
+PUSHER_PORT=443
+PUSHER_SCHEME=https
+PUSHER_APP_CLUSTER=mt1
+
+VITE_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+VITE_PUSHER_HOST="${PUSHER_HOST}"
+VITE_PUSHER_PORT="${PUSHER_PORT}"
+VITE_PUSHER_SCHEME="${PUSHER_SCHEME}"
+VITE_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+' > /var/www/laravel-praktikum-jarkom/.env
+
+cd /var/www/laravel-praktikum-jarkom && php artisan migrate:fresh
+cd /var/www/laravel-praktikum-jarkom && php artisan db:seed --class=AiringsTableSeeder
+cd /var/www/laravel-praktikum-jarkom && php artisan key:generate
+cd /var/www/laravel-praktikum-jarkom && php artisan jwt:secret
+cd /var/www/laravel-praktikum-jarkom && php artisan storage:link
+```
+
+jika berhasil lakukan konfigurasi ini pada masing2 worker 
+
+********Fern********
+
+```bash
+echo '
+server {
+
+    listen 8001;
+
+    root /var/www/laravel-praktikum-jarkom/public;
+
+    index index.php index.html index.htm;
+    server_name _;
+
+    location / {
+            try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    # pass PHP scripts to FastCGI server
+    location ~ \.php$ {
+    include snippets/fastcgi-php.conf;
+    fastcgi_pass unix:/var/run/php/php8.0-fpm.sock;
+    }
+
+location ~ /\.ht {
+            deny all;
+    }
+
+    error_log /var/log/nginx/implementasi_error.log;
+    access_log /var/log/nginx/implementasi_access.log;
+}
+' > /etc/nginx/sites-available/implementasi
+
+ln -s /etc/nginx/sites-available/implementasi /etc/nginx/sites-enabled/
+chown -R www-data.www-data /var/www/laravel-praktikum-jarkom/storage
+```
+
+****Flamme****
+
+```bash
+echo '
+server {
+
+    listen 8002;
+
+    root /var/www/laravel-praktikum-jarkom/public;
+
+    index index.php index.html index.htm;
+    server_name _;
+
+    location / {
+            try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    # pass PHP scripts to FastCGI server
+    location ~ \.php$ {
+    include snippets/fastcgi-php.conf;
+    fastcgi_pass unix:/var/run/php/php8.0-fpm.sock;
+    }
+
+location ~ /\.ht {
+            deny all;
+    }
+
+    error_log /var/log/nginx/implementasi_error.log;
+    access_log /var/log/nginx/implementasi_access.log;
+}
+' > /etc/nginx/sites-available/implementasi
+
+ln -s /etc/nginx/sites-available/implementasi /etc/nginx/sites-enabled/
+chown -R www-data.www-data /var/www/laravel-praktikum-jarkom/storage
+```
+
+**Frieren** 
+
+```bash
+echo '
+server {
+
+    listen 8003;
+
+    root /var/www/laravel-praktikum-jarkom/public;
+
+    index index.php index.html index.htm;
+    server_name _;
+
+    location / {
+            try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    # pass PHP scripts to FastCGI server
+    location ~ \.php$ {
+    include snippets/fastcgi-php.conf;
+    fastcgi_pass unix:/var/run/php/php8.0-fpm.sock;
+    }
+
+location ~ /\.ht {
+            deny all;
+    }
+
+    error_log /var/log/nginx/implementasi_error.log;
+    access_log /var/log/nginx/implementasi_access.log;
+}
+' > /etc/nginx/sites-available/implementasi
+
+ln -s /etc/nginx/sites-available/implementasi /etc/nginx/sites-enabled/
+chown -R www-data.www-data /var/www/laravel-praktikum-jarkom/storage
+```
+
+setelah itu untuk testing jalankan command berikut 
+
+```bash
+lynx localhost:{Port}
+```
+
+Hasil :
+
+![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%2014.png)
+
+******Frieren****** 
+
+![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%2015.png)
+
+Flamme
+
+![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%2016.png)
+
+**********Fern********** 
+
+![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%2017.png)
+
+---
+
+## Soal 15
+
+Riegel Channel memiliki beberapa endpoint yang harus ditesting sebanyak 100 request dengan 10 request/second. Tambahkan response dan hasil testing pada grimoire.
+
+POST /auth/register**(15)**
+
+---
+
+Sebelum memulai lakukan instalasi ini pada client 
+
+```bash
+apt-get update
+apt-get install lynx -y
+apt-get install htop -y
+apt-get install apache2-utils -y
+apt-get install jq -y
+```
+
+setelah itu masukkan script berikut pada register.json 
+
+```bash
+echo '
+{
+  "username": "kelompokIT18",
+  "password": "passwordIT18"
+}
+' > register.json
+```
+
+untuk mengecek hasil, jalankan command berikut 
+
+```bash
+ab -n 100 -c 10 -p register.json -T application/json http://192.242.4.6:8001/api/auth/register
+```
+
+Hasil :
+
+![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%2018.png)
+
+Penjelasan :
+
+- Requests per second (RPS): 78.22 RPS merupakan jumlah rata-rata permintaan yang berhasil diproses setiap detik.
+- Failed requests: Dari 100 permintaan, 99 mengalami kegagalan, semuanya terkait dengan panjang respons (Length: 99).
+- Time per request: Rata-rata waktu yang dibutuhkan untuk menanggapi setiap permintaan adalah 127.846 ms.
+- Connection Times: Waktu tercepat untuk menghubungkan adalah 0 ms, waktu terlama adalah 1 ms. Waktu pemrosesan berkisar antara 37 ms hingga 166 ms.
+- Percentage of Requests Served within a Certain Time: Menunjukkan distribusi waktu respons. Sebagai contoh, 50% dari permintaan diproses dalam waktu kurang dari 115 ms.
+
+## Soal 16
+
+Riegel Channel memiliki beberapa endpoint yang harus ditesting sebanyak 100 request dengan 10 request/second. Tambahkan response dan hasil testing pada grimoire
+
+POST /auth/login **(16)**
+
+---
+
+tambahkan script berikut ke file login.json
+
+```bash
+{
+  "username": "kelompokIT18",
+  "password": "passwordIT18"
+}
+' > login.json
+```
+
+untuk mengecek hasil jalankan command berikut 
+
+```bash
+ab -n 100 -c 10 -p login.json -T application/json http://192.242.4.6:8001/api/auth/login
+```
+
+Hasil  :
+
+![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%2019.png)
+
+Penjelasan :
+
+- Requests per second (RPS): 21.68 RPS merupakan jumlah rata-rata permintaan yang berhasil diproses setiap detik. Ini lebih rendah dibandingkan dengan pengujian sebelumnya.
+- Failed requests: Dari 100 permintaan, 40 mengalami kegagalan, semuanya terkait dengan panjang respons (Length: 40).
+- Time per request: Rata-rata waktu yang dibutuhkan untuk menanggapi setiap permintaan adalah 461.224 ms.
+- Connection Times: Waktu tercepat untuk menghubungkan adalah 0 ms, waktu terlama adalah 2 ms. Waktu pemrosesan berkisar antara 62 ms hingga 878 ms.
+- Percentage of Requests Served within a Certain Time: Menunjukkan distribusi waktu respons. Sebagai contoh, 50% dari permintaan diproses dalam waktu kurang dari 635 m
+
+---
+
+## Soal 17
+
+Riegel Channel memiliki beberapa endpoint yang harus ditesting sebanyak 100 request dengan 10 request/second. Tambahkan response dan hasil testing pada grimoire
+
+GET /me **(17)**
+
+---
+
+untuk melakukan ini pertama2 jalankan script ini yang mengarahkan hasil ke login_output.txt
+
+```bash
+curl -X POST -H "Content-Type: application/json" -d @login.json http://192.242.4.6:8001/api/auth/login > login_output.txt
+```
+
+kemudian jalankan command berikut untuk mendapat token 
+
+```bash
+token=$(cat login_output.txt | jq -r '.token')
+```
+
+untuk melakukan pengecekan jalankan command berikut 
+
+```bash
+ab -n 100 -c 10 -H "Authorization: Bearer $token" http://192.242.4.6:8001/api/me
+```
+
+Hasil :
+
+![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%2020.png)
+
+Penjelasan :
+
+- Requests per second (RPS): 68.32 RPS merupakan jumlah rata-rata permintaan yang berhasil diproses setiap detik. Ini merupakan peningkatan signifikan dibandingkan dengan pengujian sebelumnya.
+- Failed requests: Dari 100 permintaan, 38 mengalami kegagalan, semuanya terkait dengan panjang respons (Length: 38).
+- Time per request: Rata-rata waktu yang dibutuhkan untuk menanggapi setiap permintaan adalah 146.379 ms.
+- Connection Times: Waktu tercepat untuk menghubungkan adalah 0 ms, waktu terlama adalah 2 ms. Waktu pemrosesan berkisar antara 31 ms hingga 218 ms.
+- Percentage of Requests Served within a Certain Time: Menunjukkan distribusi waktu respons. Sebagai contoh, 50% dari permintaan diproses dalam waktu kurang dari 141 ms.
