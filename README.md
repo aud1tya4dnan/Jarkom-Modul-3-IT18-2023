@@ -7,6 +7,367 @@
 
 # Laporan Resmi Praktikum Modul 3 Jarkom
 
+## Soal 1
+
+Lakukan konfigurasi sesuai dengan peta yang sudah diberikan.
+
+Semua **CLIENT** harus menggunakan konfigurasi dari DHCP Server.
+
+---
+
+Set konfigurasi 
+
+**********Aura********** 
+
+```bash
+auto eth0
+iface eth0 inet dhcp
+
+auto eth1
+iface eth1 inet static
+	address 192.242.1.1
+	netmask 255.255.255.0
+
+auto eth2
+iface eth2 inet static
+	address 192.242.2.1
+	netmask 255.255.255.0
+
+auto eth3
+iface eth3 inet static
+	address 192.242.3.1
+	netmask 255.255.255.0
+
+auto eth4
+iface eth4 inet static
+	address 192.242.4.1
+	netmask 255.255.255.0
+```
+
+**************Himmel************** 
+
+```bash
+auto eth0
+iface eth0 inet static
+	address 192.242.1.2
+	netmask 255.255.255.0
+	gateway 192.242.1.1
+```
+
+**Heiter** 
+
+```bash
+auto eth0
+iface eth0 inet static
+	address 192.242.1.3
+	netmask 255.255.255.0
+	gateway 192.242.1.1
+```
+
+**************Denken************** 
+
+```bash
+auto eth0
+iface eth0 inet static
+	address 192.242.2.2
+	netmask 255.255.255.0
+	gateway 192.242.2.1
+```
+
+************Eisen************ 
+
+```bash
+**auto eth0
+iface eth0 inet static
+	address 192.242.2.3
+	netmask 255.255.255.0
+	gateway 192.242.2.1**
+```
+
+********Lugner******** 
+
+```bash
+auto eth0
+iface eth0 inet static
+	address 192.242.3.2
+	netmask 255.255.255.0
+	gateway 192.242.3.1
+```
+
+************Linie************ 
+
+```bash
+auto eth0
+iface eth0 inet static
+	address 192.242.3.3
+	netmask 255.255.255.0
+	gateway 192.242.3.1
+```
+
+************Lawine************
+
+```bash
+auto eth0
+iface eth0 inet static
+	address 192.242.3.4
+	netmask 255.255.255.0
+	gateway 192.242.3.1
+```
+
+**************Richter, Revolte, Sein, Stark**************
+
+```bash
+auto eth0
+iface eth0 inet dhcp
+```
+
+**************Frieren**************
+
+```bash
+auto eth0
+iface eth0 inet static
+	address 192.242.4.4
+	netmask 255.255.255.0
+	gateway 192.242.4.1
+```
+
+**************Flamme************** 
+
+```bash
+auto eth0
+iface eth0 inet static
+	address 192.242.4.5
+	netmask 255.255.255.0
+	gateway 192.242.4.1
+```
+
+******Fern****** 
+
+```bash
+auto eth0
+iface eth0 inet static
+	address 192.242.4.6
+	netmask 255.255.255.0
+	gateway 192.242.4.1
+```
+
+**********************Lakukan instalasi DHCP Relay********************** 
+
+```bash
+apt-get update
+apt install isc-dhcp-relay -y
+```
+
+masukkan konfigurasi ini ke /etc/default/isc-dhcp-relay
+
+```bash
+# Defaults for isc-dhcp-relay initscript
+# sourced by /etc/init.d/isc-dhcp-relay
+# installed at /etc/default/isc-dhcp-relay by the maintainer scripts
+
+#
+# This is a POSIX shell fragment
+#
+
+# What servers should the DHCP relay forward requests to?
+SERVERS="192.242.1.2"
+
+# On what interfaces should the DHCP relay (dhrelay) serve DHCP requests?
+INTERFACES="eth1 eth3 eth2 eth4"
+
+# Additional options that are passed to the DHCP relay daemon?
+OPTIONS=""
+
+> /etc/default/isc-dhcp-relay
+```
+
+lalu restart dhcp relay 
+
+```bash
+service isc-dhcp-relay restart
+```
+
+hasil :
+
+![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled.png)
+
+**********************Lakukan instalasi DHCP Server********************** 
+
+```bash
+apt-get update
+apt install isc-dhcp-server -y
+```
+
+masukkan konfigurasi ini ke /etc/default/isc-dhcp-server
+
+```bash
+# Defaults for isc-dhcp-server (sourced by /etc/init.d/isc-dhcp-server)
+
+# Path to dhcpd's config file (default: /etc/dhcp/dhcpd.conf).
+#DHCPDv4_CONF=/etc/dhcp/dhcpd.conf
+#DHCPDv6_CONF=/etc/dhcp/dhcpd6.conf
+
+# Path to dhcpd's PID file (default: /var/run/dhcpd.pid).
+#DHCPDv4_PID=/var/run/dhcpd.pid
+#DHCPDv6_PID=/var/run/dhcpd6.pid
+
+# Additional options to start dhcpd with.
+#<----->Don't use options -cf or -pf here; use DHCPD_CONF/ DHCPD_PID instead
+#OPTIONS=""
+
+# On what interfaces should the DHCP server (dhcpd) serve DHCP requests?
+#<----->Separate multiple interfaces with spaces, e.g. "eth0 eth1".
+INTERFACESv4="eth0"
+INTERFACESv6="eth0"
+```
+
+lalu restart dhcp server 
+
+```bash
+service isc-dhcp-server restart
+```
+
+hasil :
+
+![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%201.png)
+
+---
+
+## Soal 2
+
+Client yang melalui Switch3 mendapatkan range IP dari [prefix IP].3.16 - [prefix IP].3.32 dan [prefix IP].3.64 - [prefix IP].3.80 **(2)**
+
+---
+
+untuk setting prefix IP kita dapat menambahkan kode ini ke DHCP Server di /etc/dhcp/dhcpd.conf
+
+```bash
+subnet 192.242.3.0 netmask 255.255.255.0 {
+    range  192.242.3.16 192.242.3.32;
+    range  192.242.3.64 192.242.3.80;
+    option routers 192.242.3.1;
+    option broadcast-address 192.242.3.255;
+    option domain-name-servers 192.242.1.3;
+    default-lease-time 180; 
+    max-lease-time 5760;
+}
+```
+
+hasil ;
+
+Revolte
+
+![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%202.png)
+
+Ritcher 
+
+![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%203.png)
+
+---
+
+## Soal 3
+
+Client yang melalui Switch4 mendapatkan range IP dari [prefix IP].4.12 - [prefix IP].4.20 dan [prefix IP].4.160 - [prefix IP].4.168 **(3)**
+
+---
+
+untuk setting prefix IP kita dapat menambahkan kode ini ke DHCP Server di /etc/dhcp/dhcpd.conf
+
+```bash
+subnet 192.242.4.0 netmask 255.255.255.0 {
+    range  192.242.4.12 192.242.4.20;
+    range  192.242.4.160 192.242.4.168;
+    option routers 192.242.4.1;
+    option broadcast-address 192.242.4.255;
+    option domain-name-servers 192.242.1.3;
+    default-lease-time 720;
+    max-lease-time 5760;
+}
+```
+
+hasil : 
+
+Sein
+
+![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%204.png)
+
+Stark
+
+![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%205.png)
+
+---
+
+## Soal 4
+
+Client mendapatkan DNS dari Heiter dan dapat terhubung dengan internet melalui DNS tersebut **(4)**
+
+---
+
+Agar semua client dapat terhubung ke internet konfigurasi pada file /etc/bind/named.conf.options pada Heiter (DNS SERVER)
+
+```bash
+options {
+        directory \"/var/cache/bind\";
+
+        forwarders {
+                8.8.8.8;
+                8.8.8.4;
+        };
+
+        // dnssec-validation auto;
+        allow-query { any; };
+        auth-nxdomain no;    # conform to RFC1035
+        listen-on-v6 { any; };
+};
+```
+
+Hasil :
+
+Stark
+
+![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%206.png)
+
+Sein
+
+![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%207.png)
+
+Richter
+
+![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%208.png)
+
+Revolte
+
+![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%209.png)
+
+---
+
+## Soal 5
+
+Lama waktu DHCP server meminjamkan alamat IP kepada Client yang melalui Switch3 selama 3 menit sedangkan pada client yang melalui Switch4 selama 12 menit. Dengan waktu maksimal dialokasikan untuk peminjaman alamat IP selama 96 menit **(5)**
+
+---
+
+```bash
+subnet 192.242.3.0 netmask 255.255.255.0 {
+    ...
+    default-lease-time 180; 
+    max-lease-time 5760;
+    ...
+}
+subnet 192.242.4.0 netmask 255.255.255.0 {
+    ...
+    default-lease-time 720;
+    max-lease-time 5760;
+    ...
+}
+```
+
+hasil :
+
+![Untitled](praktikum%203%204eaad37b4d394bd8b1123ba27e94a074/Untitled%2010.png)
+
+---
+
 ## Soal 6
 
 >Pada masing-masing worker PHP, lakukan konfigurasi virtual host untuk website berikut dengan menggunakan php 7.3.
