@@ -610,12 +610,17 @@ auth_basic_user_file /etc/nginx/rahasisakita/.htpasswd;
 
 Kemudian ketika diakses pada url `http://www.granz.channel.it18.com` akan muncul laman un-authorized access sebagai berikut
 
-image
+![image10](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/91017662/c54ec3f0-1488-4964-ad70-336da1d0cf64)
+
+![image9](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/91017662/f767f5a3-f9a4-4974-86ce-69c9eb9932f5)
+![image2](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/91017662/4a588cd0-d7ae-40b0-943e-70f226ed8d73)
+![image15](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/91017662/940f8131-8cdb-49cb-9e87-e1b292136ec7)
 
 
 ## Soal 11
 
 >Lalu buat untuk setiap request yang mengandung /its akan di proxy passing menuju halaman https://www.its.ac.id. (11)
+
 
 
 
