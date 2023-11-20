@@ -7,6 +7,69 @@
 
 # Laporan Resmi Praktikum Modul 3 Jarkom
 
+## Soal 0
+
+>Setelah mengalahkan Demon King, perjalanan berlanjut. Kali ini, kalian diminta untuk melakukan register domain berupa riegel.canyon.yyy.com untuk worker Laravel dan granz.channel.yyy.com untuk worker PHP (0) mengarah pada worker yang memiliki IP [prefix IP].x.1.
+
+Konfigurasi DNS server di Heiter sebagai berikut
+
+```
+echo '
+zone "riegel.canyon.IT18.com" {
+        type master;
+        notify yes;
+        file "/etc/bind/jarkom/riegel.canyon.IT18.com";
+};
+
+zone "granz.channel.IT18.com" {
+    type master;
+    notify yes;
+    file "/etc/bind/jarkom/granz.channel.IT18.com";
+};
+' > /etc/bind/named.conf.local
+
+mkdir /etc/bind/jarkom
+
+cp /etc/bind/db.local /etc/bind/jarkom/riegel.canyon.IT18.com
+cp /etc/bind/db.local /etc/bind/jarkom/granz.channel.IT18.com
+
+echo '
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     riegel.canyon.IT18.com. root.riegel.canyon.IT18.com. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      riegel.canyon.IT18.com.
+@       IN      A       192.242.4.4 #frieren 
+www     IN      CNAME   riegel.canyon.IT18.com.
+' > /etc/bind/jarkom/riegel.canyon.IT18.com
+
+echo '
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     granz.channel.IT18.com. root.granz.channel.IT18.com. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      granz.channel.IT18.com.
+@       IN      A       192.242.3.4 #lawiner 
+www     IN      CNAME   granz.channel.IT18.com.
+' > /etc/bind/jarkom/granz.channel.IT18.com 
+```
+
+Kemudian restart bind9 server
+
 ## Soal 1
 
 Lakukan konfigurasi sesuai dengan peta yang sudah diberikan.
