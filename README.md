@@ -55,7 +55,8 @@ service nginx restart
 
 Jalankan command `lynx localhost` pada masing2 worker dan akan muncul hasil sebagai berikut
 
-[Output.png]
+
+![image6](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/91017662/d2074868-8e18-44c9-b301-9bf178bdbb9b)
 
 
 ## Soal 7
@@ -147,7 +148,7 @@ ab -n 1000 -c 100 http://www.granz.channel.it18.com/
 
 Hasilnya adalah sebagai berikut
 
-[OUTPUT]
+![image12](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/91017662/ac8098b7-b470-40c5-9aad-bc5c8af219b6)
 
 ## Soal 8
 
