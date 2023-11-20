@@ -588,6 +588,36 @@ ab -n 100 -c 10 http://www.granz.channel.it18.com/
 
 ![image](https://github.com/aud1tya4dnan/Jarkom-Modul-3-IT18-2023/assets/91017662/713641b1-b66e-47f7-96a9-6e7660978124)
 
+## Soal 10
+
+>Selanjutnya coba tambahkan konfigurasi autentikasi di LB dengan dengan kombinasi username: “netics” dan password: “ajkyyy”, dengan yyy merupakan kode kelompok. Terakhir simpan file “htpasswd” nya di /etc/nginx/rahasisakita/ (10)
+
+Pertama adalah melakukan [setup] dan kemudian melakukan beberapa konfigurasi
+sebagai berikut
+
+```
+mkdir /etc/nginx/rahasisakita
+htpasswd -b -c /etc/nginx/rahasisakita/.htpasswd netics ajkit18
+```
+
+Kemudian menambahkan command berikut pada konfigurasi nginx load balancer pada bagian `location /`
+```
+auth_basic "Restricted Content";
+auth_basic_user_file /etc/nginx/rahasisakita/.htpasswd;
+```
+
+### Output
+
+Kemudian ketika diakses pada url `http://www.granz.channel.it18.com` akan muncul laman un-authorized access sebagai berikut
+
+image
+
+
+## Soal 11
+
+>Lalu buat untuk setiap request yang mengandung /its akan di proxy passing menuju halaman https://www.its.ac.id. (11)
+
+
 
 ## Soal 13
 
